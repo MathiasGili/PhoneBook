@@ -112,7 +112,7 @@ module.exports = {
             },
             auth: {
                 user: "nowportsnotreplay@outlook.es",
-                pass: process.env.PASS_email,
+                pass: process.env.PASS_EMAIL,
             },
         });
 
