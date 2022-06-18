@@ -1,0 +1,19 @@
+FROM node:14
+
+WORKDIR /app
+
+
+ENV PASS_EMAIL $PASS_EMAIL
+ENV BASE_URL $BASE_URL
+ENV JWT_SECRET $JWT_SECRET
+ENV APP_PORT $APP_PORT
+ENV DB_URI $DB_URI
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+
+EXPOSE 3000
+CMD [ "node", "index.js" ]
