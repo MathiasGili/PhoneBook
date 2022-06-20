@@ -6,10 +6,12 @@ Para levantar todo el stack pararse en `./docker`
 
 Ejecutar:
 ```sh
-sh stack_prod_start.sh
+docker run -d -p 5000:5000 --name registry registry:2.7
+
+sh deploy.sh
 ```
 
-Se puede acceder a la app web en [http://localhost/posts/login](http://localhost/posts/login)
+Se puede acceder a la app web en [http://localhost/](http://localhost/)
 
 Para detener el stack:
 
