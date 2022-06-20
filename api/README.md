@@ -27,3 +27,156 @@ Para cada una de las variables de entorno en .env.local definir el archivo `api/
 cd app
 docker run --rm --env-file .env -p 3000:3000 --name api api
 ```
+### API
+
+## Available Endpoints
+
+### Register
+**[POST]** /user
+
+Request parameters:
+
+Body:
+```
+{
+    "email": "mathiasgili@gmail.com",
+    "password": "gili"
+}
+```
+
+### Login
+**[POST]** /login
+
+Request parameters:
+
+Body:
+```
+{
+    "email": "mgili@gmai.com",
+    "password": "9090"
+}
+```
+
+### Send email to recover password
+**[POST]** /recoveryPassword
+
+Request parameters:
+
+Body:
+```
+{
+    "email": "pepe",
+    "password": "ochoa",
+    "password": "iochis"
+}
+
+```
+
+### Update user password
+**[PATCH]** /user
+
+Request parameters:
+
+Body:
+```
+{
+    "email": "pepe",
+    "password": "ochoa"
+}
+```
+
+### Create new contact
+**[POST]** /contacts
+
+Request parameters:
+
+Body:
+```
+{
+"firstName": "Teresa",
+"lastName": "sellanes",
+"phone": "+598 98451946"
+}
+```
+
+Headers: 
+```
+{
+'Authorization': 'Bearer ' + token
+}
+```
+
+### Get all contacts for a user
+**[GET]** /contacts
+
+Request parameters:
+
+Headers:
+```
+{
+'Authorization': 'Bearer ' + token
+}
+```
+
+### Get contact for a user
+**[GET]** /contacts/:_id
+
+Request parameters:
+
+Params:
+```
+:_id
+```
+
+Headers: 
+```{
+'Authorization': 'Bearer ' + token
+}
+```
+
+### Delete contact for a user
+**[DELETE]** /contacts/:_id
+
+Request parameters:
+
+Params:
+```
+:_id
+```
+Headers: 
+```{
+'Authorization': 'Bearer ' + token
+}
+```
+
+### Update contact for a user
+**[PATCH]** /contacts/
+
+Request parameters:
+
+Body:
+```
+{
+"firstName": "mathias",
+"lastName": "gili",
+"phone": "+598 95973363",
+"_id": "61f4c67c48cfa608e4640470"
+}
+
+```
+
+Headers: 
+```{
+'Authorization': 'Bearer ' + token
+}
+```
+
+## Template for .env file
+
+```
+DB_URI=***
+APP_PORT=***
+JWT_SECRET=***
+BASE_URL=***
+PASS_EMAIL=***
+```

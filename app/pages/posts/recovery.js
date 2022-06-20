@@ -10,6 +10,7 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 export default function recovery() {
     const [email, setEmail] = useState('');
     const [error, setError] = useState('');
+    const [ok, setOk] = useState(false);
     const baseURL = process.env.REACT_APP_BASE_URL;
 
 
@@ -25,7 +26,10 @@ export default function recovery() {
             data: user,
         };
         try {
-            await axios(options);
+            let response = await axios(options);
+            if (response.status == 201) {
+                setOk(true);
+            }
         } catch (err) {
             let errText = err.response.data.error
             setError(errText);
@@ -33,6 +37,7 @@ export default function recovery() {
     }
 
     const recoverUser = () => {
+        setError('');
         let user = {};
         user.email = email.toLowerCase();
         sendCredentials(user);
@@ -65,9 +70,13 @@ export default function recovery() {
                     <CardActions>
                         <Box
                             m='auto'>
-                            <Button
-                                onClick={() => { recoverUser() }}
-                                variant="contained">Next</Button>
+                            { ok ? (
+                                    <div >sent successfully</div>) :
+                                    (
+                                        <Button
+                                            onClick={() => { recoverUser() }}
+                                            variant="contained">Next</Button>
+                                    )}
                         </Box>
                         <div id="loginErrorMsg">{error}</div>
                     </CardActions>

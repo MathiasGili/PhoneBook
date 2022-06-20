@@ -29,7 +29,6 @@ module.exports = {
                 .json({ error: "Incorrect email or password" });
 
         } catch (err) {
-            console.log(err)
             return res
                 .status(401)
                 .json({ error: "Incorrect email or password" });
@@ -104,18 +103,17 @@ module.exports = {
         let testAccount = await nodemailer.createTestAccount();
         let transporter = nodemailer.createTransport({
             service: "Outlook365",
-            host: "smtp-mail.outlook.com",
+            host: "smtp.live.com",
             port: "587",
             tls: {
                 ciphers: "SSLv3",
                 rejectUnauthorized: false,
             },
             auth: {
-                user: "nowportsnotreplay@outlook.es",
+                user: "nowportsrecoverynotreplay@hotmail.com",
                 pass: process.env.PASS_EMAIL,
             },
         });
-
         const email = req.body.email
         if (!email) {
             return res.status(400)
@@ -139,13 +137,13 @@ module.exports = {
       
       In order to recover your access to PhoneBook by NowPorts, you have to follow the next link, and set your new password.
       
-      ${baseURL}/passwordRecovery/${encryptedPassword}, ${email}
+      ${baseURL}/posts/passwordRecovery?pass=${encryptedPassword}&email=${email}
       
       Best Regards!,
       Mathias, NowPorts, Support Team.
       `
         let info = await transporter.sendMail({
-            from: "nowportsnotreplay@outlook.es", 
+            from: "nowportsrecoverynotreplay@hotmail.com", 
             to: email,
             subject: "Recover your account!",
             text: emailText, 

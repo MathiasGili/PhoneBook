@@ -64,10 +64,7 @@ module.exports = {
     async getContact(req, res) {
         const contactID = req.params;
         try {
-            
-            console.log(contactID);
             const foundContact = await Contact.findById(contactID);
-            console.log(foundContact);
             if (foundContact == null) {
                 return res.status(404).json({message: `No contact with ID: ${contactID}`});
             }
@@ -81,7 +78,6 @@ module.exports = {
 
     async deleteContact(req, res) {
         const contactID = req.params;
-        console.log('hol',contactID)
         try {
             const foundContact = await Contact.findById(contactID);
 
@@ -105,10 +101,21 @@ module.exports = {
             phone: phone,
             _id: _id
         }
-        if(contactToUpdate.firstName == "" || contactToUpdate.lastName == "" || contactToUpdate.phone == ""){
+        
+        if (contactToUpdate.firstName == "") {
             return res
                 .status(400)
-                .json({message: "All fields are required"});
+                .json({error: "First name is required"});
+        }
+        if (contactToUpdate.lastName == "") {
+            return res
+                .status(400)
+                .json({error: "Last name is required"});
+        }
+        if (contactToUpdate.phone == "") {
+            return res
+                .status(400)
+                .json({error: "Phone is required"});
         }
         try {
             let foundContact = await Contact.findOne({_id: contactToUpdate._id});
