@@ -1,0 +1,5 @@
+
+export const SET_IS_LOGGED_IN_TRUE = 'SET_IS_LOGGED_IN_TRUE';
+export const SET_IS_LOGGED_IN_FALSE = 'SET_IS_LOGGED_IN_FALSE';
+export const SET_TOKEN = 'SET_TOKEN';
+export const REMOVE_TOKEN = 'REMOVE_TOKEN';

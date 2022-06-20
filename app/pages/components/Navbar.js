@@ -1,30 +1,23 @@
 
 
-import React, { useState, useEffect } from 'react'
+import React from 'react'
+import { useSelector, useDispatch } from "react-redux";
 import {
     AppBar, Box, Toolbar, Typography, IconButton, Container, Button
 } from '@mui/material';
 import { useRouter } from 'next/router'
+import {  setIsLoggedInFalse } from './../../state/actions/isloggedIn'
+import { removeToken } from './../../state/actions/token'
+
+
+
+
 
 const Navbar = () => {
 
     const router = useRouter();
-    const [isLogged, setIsLogged] = useState(false);
-
-    useEffect(() => {
-        if (typeof window !== 'undefined') {
-            setIsLogged(localStorage.getItem("isLogged"));
-        }
-    }, []);
-
-    const changeState = () => {
-        if (isLogged) {
-
-            localStorage.removeItem('token');
-            localStorage.setItem('isLogged', false);
-            router.push('/posts/login');
-        }
-    };
+    const dispatch = useDispatch();
+    const isLogged = useSelector((state) => state.isLoggedIn);
 
     const addUser = () => {
         router.push('/posts/newUser');
@@ -49,12 +42,15 @@ const Navbar = () => {
                         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                             PhoneBook
                         </Typography>
-                        {console.log(isLogged)}
                         {isLogged ?
                             (
                                 <Button
                                     sx={{ color: 'white' }}
-                                    onClick={() => { changeState() }}
+                                    onClick={() => {
+                                        dispatch(setIsLoggedInFalse());
+                                        dispatch(removeToken());
+                                        router.push('/posts/login');
+                                    }}
                                     variant="text">
                                     Logout
                                 </Button>
@@ -76,7 +72,6 @@ const Navbar = () => {
                                     </Button>
                                 </>
                             )}
-
                     </Toolbar>
                 </AppBar>
             </Box>

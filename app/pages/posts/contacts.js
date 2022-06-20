@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
+import { useSelector } from "react-redux";
 import axios from "axios";
 import {
     Box, Button,  Card, CardContent, CardHeader, Fab, Table, TableBody,
@@ -17,16 +18,13 @@ export default function contacts() {
     const [contactsList, setContactsList] = useState([]);
     const fetchFailure = "FetchFailure";
     const [setErrText] = useState('');
+    const token = useSelector((state) => state.token);
 
 
     useEffect(() => {
-        if (typeof window !== 'undefined') {
-            getContacts(localStorage.getItem("token"));
-        }
-    }, []);
-
-
-    async function getContacts(token) {
+        getContacts();
+    }, [])
+    async function getContacts() {
         let auth = `Bearer ${token}`
         let options = {
             method: "get",
@@ -48,7 +46,6 @@ export default function contacts() {
 
 
     const deleteContact = async (id) => {
-        let token = localStorage.getItem("token");
         let auth = `Bearer ${token}`
         let options = {
             method: "delete",

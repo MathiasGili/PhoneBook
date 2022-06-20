@@ -11,8 +11,8 @@ import {
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import { storeIsLogged } from '../../slices/isLoggedSlice';
-import { storeToken } from '../../slices/tokenSlice';
+import {setIsLoggedInTrue} from './../../state/actions/isloggedIn'
+import {setToken} from './../../state/actions/token'
 
 
 const initialState = {
@@ -66,8 +66,8 @@ export default function login() {
         try {
             const response = await axios(options);
             const { token } = response.data;
-            dispatch(storeToken(token));
-            dispatch(storeIsLogged(true));
+            dispatch(setToken(token));
+            dispatch(setIsLoggedInTrue());
             router.push("/posts/contacts")
         } catch (err) {
             let errText = err.response.data.error
@@ -85,6 +85,8 @@ export default function login() {
         }
     }
 
+
+    
     const loginUser = () => {
         let user = {};
         user.email = email.toLowerCase();
@@ -107,6 +109,7 @@ export default function login() {
                                 value={email}
                                 onChange={handleChangeEmail()}
                                 required
+                                placeholder="me@nowports.com"
                                 error={requiredFieldEmail}
                                 endAdornment={
                                     <InputAdornment position="start">

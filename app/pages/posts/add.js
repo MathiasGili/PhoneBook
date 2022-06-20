@@ -2,6 +2,7 @@
 import Container from '@mui/material/Container';
 import React, { useState } from 'react'
 import { useRouter } from 'next/router'
+import { useSelector } from "react-redux";
 import axios from "axios";
 import {
     Box, Card, CardContent, CardHeader, FormControl, TextField, Stack, Button
@@ -24,7 +25,7 @@ export default function add() {
 
     const baseURL = process.env.REACT_APP_BASE_URL
     const router = useRouter();
-    const [errorTxt] = useState('');
+    const token= useSelector((state) => state.token);
 
     const [newContact, setNewContact] = useState(newContactInitialState);
     const [{
@@ -41,7 +42,6 @@ export default function add() {
     async function addContact(newContact) {
 
 
-        let token = localStorage.getItem("token");
         let auth = `Bearer ${token}`
         let options = {
             method: "post",
@@ -124,7 +124,6 @@ export default function add() {
                                 <Box
                                     m='auto'>
                                     <Button onClick={() => { addContact(newContact) }} variant="contained">Add</Button>
-                                    <div id="errosUpdate">{errorTxt}</div>
                                 </Box>
                             </Stack>
                         </FormControl>

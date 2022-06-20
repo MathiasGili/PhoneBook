@@ -10,8 +10,8 @@ import {
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import { storeIsLogged } from '../../slices/isLoggedSlice';
-import { storeToken } from '../../slices/tokenSlice';
+import {setIsLoggedInTrue} from './../../state/actions/isloggedIn'
+import {setToken} from './../../state/actions/token'
 
 
 const initialState = {
@@ -65,8 +65,8 @@ export default function newUser() {
         try {
             const response = await axios(options);
             const { token } = response.data;
-            dispatch(storeToken(token));
-            dispatch(storeIsLogged(true));
+            dispatch(setToken(token));
+            dispatch(setIsLoggedInTrue());
             router.push("/posts/contacts");
         } catch (err) {
             let errText = err.response.data.error
