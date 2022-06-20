@@ -1,8 +1,9 @@
 # Stack deploy para desarrollo
 
-Borrar las carpetas .next y .node_modules
 
 Para levantar todo el stack pararse en `./docker`
+
+Agregar el archivo .env con sus correspodientes variables
 
 Ejecutar:
 ```sh
