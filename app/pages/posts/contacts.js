@@ -1,18 +1,11 @@
-
-import Container from '@mui/material/Container';
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import axios from "axios";
 import {
-    Box, Button,  Card, CardContent, CardHeader, Fab
+    Box, Button,  Card, CardContent, CardHeader, Fab, Table, TableBody,
+     TableCell, TableContainer, TableHead, TableRow, Container
 } from '@mui/material';
 
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 
@@ -22,7 +15,8 @@ export default function contacts() {
     const router = useRouter();
     const baseURL = process.env.REACT_APP_BASE_URL
     const [contactsList, setContactsList] = useState([]);
-    const fetchFailure = "FetchFailure"
+    const fetchFailure = "FetchFailure";
+    const [setErrText] = useState('');
 
 
     useEffect(() => {
@@ -68,7 +62,9 @@ export default function contacts() {
             await axios(options);
             getContacts(token);
         } catch (err) {
-            let errText = err.response.data.error
+            let errText = err.response.data.error;
+            setErrText(errText);
+            
         }
     };
     const editContact = (row) => {
@@ -98,6 +94,7 @@ export default function contacts() {
                                     <TableRow>
                                         <TableCell>Name</TableCell>
                                         <TableCell>Last Name</TableCell>
+                                        <TableCell>Phone</TableCell>
                                         <TableCell align="right"></TableCell>
                                         <TableCell align="right"></TableCell>
                                     </TableRow>
@@ -112,6 +109,7 @@ export default function contacts() {
                                                 {row.firstName}
                                             </TableCell>
                                             <TableCell align="right">{row.lastName}</TableCell>
+                                            <TableCell align="right">{row.phone}</TableCell>
                                             <TableCell align="right">
                                                 <Fab
                                                     size="small"

@@ -3,7 +3,6 @@ import Container from '@mui/material/Container';
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import axios from "axios";
-import { useDispatch } from "react-redux";
 import {
     Box, Card, CardContent, CardHeader, FormControl, TextField, Stack, Button
 } from '@mui/material';
@@ -11,10 +10,6 @@ import {
 
 
 export default function edit() {
-
-    const fetchFailure = "FetchFailure"
-    const token = 'eyJhbGciOiJIUzI1NiJ9.bWF0aGlhcy5naWxpa0BnbWFpbC5jb20.WN0NVq0opn_OuXCaTDqBghG-xt_GxHSYrgs__OxmQBw';
-
     const baseURL = process.env.REACT_APP_BASE_URL
     const router = useRouter();
     const [errorTxt, setErrorTxt] = useState('');

@@ -1,12 +1,9 @@
 
 
 import React, { useState, useEffect } from 'react'
-import Link from 'next/link'
 import {
     AppBar, Box, Toolbar, Typography, IconButton, Container, Button
-
 } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
 import { useRouter } from 'next/router'
 
 const Navbar = () => {

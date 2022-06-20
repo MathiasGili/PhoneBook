@@ -24,7 +24,7 @@ export default function add() {
 
     const baseURL = process.env.REACT_APP_BASE_URL
     const router = useRouter();
-    const [errorTxt, setErrorTxt] = useState('');
+    const [errorTxt] = useState('');
 
     const [newContact, setNewContact] = useState(newContactInitialState);
     const [{
