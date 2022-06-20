@@ -44,9 +44,6 @@ module.exports = {
 
     async getContacts(req, res) {
         
-        const contactID = req.params;
-        
-        console.log(contactID);
         let email = req.decoded;
         try {
             const foundUser = await User.find({email: email});
@@ -84,6 +81,7 @@ module.exports = {
 
     async deleteContact(req, res) {
         const contactID = req.params;
+        console.log('hol',contactID)
         try {
             const foundContact = await Contact.findById(contactID);
 

@@ -33,9 +33,7 @@ export default function newUser() {
     const [{
         incorrectCredentials,
         requiredFieldPassword,
-        requiredFieldEmail,
-        emailText,
-        passwordText
+        requiredFieldEmail
     }, setError] = useState(initialState);
 
 

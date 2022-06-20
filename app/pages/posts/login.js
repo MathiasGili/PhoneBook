@@ -34,9 +34,7 @@ export default function login() {
     const [{
         incorrectCredentials,
         requiredFieldPassword,
-        requiredFieldEmail,
-        emailText,
-        passwordText
+        requiredFieldEmail
     }, setError] = useState(initialState);
 
 
