@@ -27,4 +27,4 @@ Para cada una de las variables de entorno en .env.local definir el archivo `app/
 cd app
 docker run --rm --env-file .env -p 3009:3009 --name app app
 ```
-Para verificar que todo funciona conectarse a http://localhost:3000/posts/login
+Para verificar que todo funciona conectarse a http://localhost:3009/posts/login
